@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Project Blog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Cybersecurity Project: Virtual Machine Setup and Penetration Testing</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#setup">Setting Up the Virtual Machines</a></li>
+            <li><a href="#testing">Conducting the Penetration Test</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <section id="introduction">
+        <h2>Introduction</h2>
+        <p>This project involves setting up a Windows 11 virtual machine and a Kali Linux virtual machine on a Mac using UTM. The goal is to practice penetration testing by attempting to exploit vulnerabilities in the Windows VM using tools from the Kali VM.</p>
+    </section>
+
+    <section id="setup">
+        <h2>Setting Up the Virtual Machines</h2>
+        <h3>1. Installing UTM</h3>
+        <ol>
+            <li><strong>Download UTM:</strong> Visit the <a href="https://mac.getutm.app/">UTM website</a> and download the latest version for macOS. Install UTM by dragging the application into your <code>Applications</code> folder.</li>
+            <li><strong>Launch UTM:</strong> Open UTM from your <code>Applications</code> folder.</li>
+        </ol>
+
+        <h3>2. Setting Up the Windows 11 VM</h3>
+        <ol>
+            <li><strong>Download a Windows 11 ISO:</strong> Go to the official <a href="https://www.microsoft.com/en-us/software-download/windows11">Microsoft Windows 11 download page</a> and download the ISO file.</li>
+            <li><strong>Create a New Virtual Machine in UTM:</strong> Click the <code>+</code> button in UTM to create a new virtual machine. Select <code>Virtualize → Windows</code> and click <code>Next</code>.</li>
+            <li><strong>Configure the VM:</strong> Give your VM a name like <code>Windows 11</code>. Allocate enough resources (e.g., at least 4 GB of RAM and 2 CPU cores). Click <code>Browse</code> to select the Windows 11 ISO. Ensure <code>UEFI</code> is selected.</li>
+            <li><strong>Network Configuration:</strong> Under the <code>Network</code> tab, choose a network interface that connects the Windows VM to the same network as your Kali Linux VM. Use <code>Shared Network (NAT)</code> or a custom network.</li>
+            <li><strong>Finalize and Install Windows 11:</strong> Click <code>Save</code> and then <code>Play</code> to start the VM. Follow the on-screen instructions to install Windows 11.</li>
+        </ol>
+
+        <h3>3. Setting Up the Kali Linux VM</h3>
+        <ol>
+            <li><strong>Download the Kali Linux ISO:</strong> Visit the <a href="https://www.kali.org/get-kali/#kali-virtual-machines">Kali Linux download page</a> and download the ISO file.</li>
+            <li><strong>Create a New Virtual Machine in UTM:</strong> Click the <code>+</code> button to create another virtual machine. Select <code>Virtualize → Linux/Other</code> and click <code>Next</code>.</li>
+            <li><strong>Configure the Kali VM:</strong> Name this VM <code>Kali Linux</code>. Allocate resources similar to the Windows VM. Select the Kali Linux ISO file.</li>
+            <li><strong>Network Configuration:</strong> Ensure that the network settings match those of the Windows VM to allow both machines to communicate.</li>
+            <li><strong>Finalize and Install Kali Linux:</strong> Save the VM configuration and start it. Follow the installation steps for Kali Linux.</li>
+            <li><strong>Update and Install Tools:</strong> Once Kali Linux is installed, update the system and install any additional tools you need:
+                <pre><code>sudo apt update && sudo apt upgrade -y
+sudo apt install -y metasploit-framework nikto dirb</code></pre>
+            </li>
+        </ol>
+
+        <h3>4. Networking Between VMs</h3>
+        <ol>
+            <li><strong>Check Network Connectivity:</strong> Open a terminal in Kali Linux and ping the Windows VM to ensure they can communicate:
+                <pre><code>ping &lt;Windows_VM_IP&gt;</code></pre>
+            </li>
+            <li><strong>Troubleshooting:</strong> If the VMs can’t communicate, check the network settings in UTM and make sure both VMs are connected to the same network interface.</li>
+        </ol>
+
+        <h3>5. Setting Up Monitoring Tools on Windows 11</h3>
+        <ol>
+            <li><strong>Install Wireshark:</strong> Download Wireshark from <a href="https://www.wireshark.org/">wireshark.org</a> and install it on the Windows 11 VM.</li>
+            <li><strong>Configure Windows Defender Firewall:</strong> Ensure that the firewall is configured to allow traffic between the VMs, especially for the ports and services you intend to scan or exploit.</li>
+            <li><strong>Enable Remote Desktop (Optional):</strong> If you want to manage the Windows VM remotely from Kali, enable Remote Desktop on Windows 11.</li>
+        </ol>
+    </section>
+
+    <section id="testing">
+        <h2>Conducting the Penetration Test</h2>
+        <p>With the VMs set up and connected, you can now proceed with penetration testing.</p>
+        <h3>1. Reconnaissance</h3>
+        <p>From the Kali VM, use tools like <code>nmap</code> to scan the Windows VM for open ports and services.</p>
+
+        <h3>2. Exploitation</h3>
+        <p>Attempt to exploit discovered vulnerabilities using tools like Metasploit.</p>
+
+        <h3>3. Analysis</h3>
+        <p>Use Wireshark on the Windows VM to capture and analyze the traffic during the penetration test.</p>
+    </section>
+
+    <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>This project provided hands-on experience with setting up virtual machines, networking, and conducting basic penetration testing. The detailed steps and challenges encountered helped reinforce concepts in cybersecurity and systems administration.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cybersecurity Project Blog. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
